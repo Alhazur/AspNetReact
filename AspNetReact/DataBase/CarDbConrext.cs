@@ -9,8 +9,7 @@ namespace AspNetReact.DataBase
 {
     public class CarDbContext : DbContext
     {
-        public CarDbContext(DbContextOptions<CarDbContext> options)
-            : base(options) { }
+        public CarDbContext(DbContextOptions<CarDbContext> options) : base(options) { }
         public DbSet<Car> Cars { get; set; }
     }
 }

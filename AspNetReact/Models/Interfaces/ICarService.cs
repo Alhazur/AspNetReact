@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AspNetReact.Models.Interfaces
 {
-    interface ICarService
+    public interface ICarService
     {
         Car CreateCar(string name, string brand, int year);
 

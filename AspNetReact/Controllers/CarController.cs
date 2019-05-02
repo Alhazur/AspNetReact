@@ -1,94 +1,83 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using AspNetReact.Models.Classes;
-//using AspNetReact.Models.Interfaces;
-//using Microsoft.AspNetCore.Mvc;
+﻿using AspNetReact.Models.Classes;
+using AspNetReact.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace AspNetReact.Controllers
-//{
-//    public class CarController : Controller
-//    {
-//        private readonly ICarService _carService;
+namespace AspNetReact.Controllers
+{
+    [Route("api/[controller]")]
+    public class CarController : Controller
+    {
+        private readonly ICarService _car;
 
-//        public CarController(ICarService carService)
-//        {
-//            _carService = carService;
-//        }
+        public CarController(ICarService car)
+        {
+            _car = car;
+        }
 
-//        public IActionResult Index()
-//        {
-//            return View();
-//        }
-//        [HttpGet]
-//        public IActionResult Create()
-//        {
-//            return View();
-//        }
+        public IActionResult Index()
+        {
+            return View(_car.Allcars());
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-//        [HttpPost]
-//        public IActionResult Create(Car car)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                car = _carService.CreateCar(car.Name, car.Brand, car.Year);
-//                return RedirectToAction("Index");
-//            }
-//            return View(car);
-//        }
+        [HttpPost]
+        public IActionResult Create(Car car)
+        {
+            if (ModelState.IsValid)
+            {
+                car = _car.CreateCar(car.Name, car.Brand, car.Year);
+                return RedirectToAction("Index");
+            }
+            return View(car);
+        }
 
-//        [HttpGet]
-//        public IActionResult Edit(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return NotFound;
-//            }
-//            var car = _carService.FindCar((int)id);
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            var car = _car.FindCar((int)id);
+            
+            return View(car);
+        }
 
-//            if (car == null)
-//            {
-//                return NotFound;
-//            }
-//            return View(car);
-//        }
+        [HttpPost]
+        public IActionResult Edit(Car car)
+        {
+            if (ModelState.IsValid)
+            {
+                _car.UpdateCar(car);
+                return RedirectToAction("Index");
+            }
+            return View(car);
+        }
 
-//        [HttpPost]
-//        public IActionResult Edit(Car car)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _carService.UpdateCar(car);
-//                return RedirectToAction("Index");
-//            }
-//            return View(car);
-//        }
+        public IActionResult Delete(int? id)
+        {
+            if (id != null)
+            {
+                _car.DeleteCar((int)id);
+                return RedirectToAction("Index");
+            }
+            return Content("");
+        }
 
-//        public IActionResult Delete(int? id)
-//        {
-//            if (id != null)
-//            {
-//                _carService.DeleteCar((int)id);
-//                return RedirectToAction("Index");
-//            }
-//            return Content("");
-//        }
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-//        public IActionResult Details(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return NotFound();
-//            }
+            var car = _car.FindCar((int)id);
 
-//            var car = _carService.FindCar((int)id);
-
-//            if (car == null)
-//            {
-//                return NotFound();
-//            }
-//            return View(car);
-//        }
-//    }
-//}
+            if (car == null)
+            {
+                return NotFound();
+            }
+            return View(car);
+        }
+    }
+}
