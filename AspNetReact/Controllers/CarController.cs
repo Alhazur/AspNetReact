@@ -24,15 +24,26 @@ namespace AspNetReact.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public IActionResult Create(Car car)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        car = _car.CreateCar(car.Name, car.Brand, car.Year);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(car);
+        //}
+
         [HttpPost]
-        public IActionResult Create(Car car)
+        public JsonResult Create(Car car)
         {
             if (ModelState.IsValid)
             {
                 car = _car.CreateCar(car.Name, car.Brand, car.Year);
-                return RedirectToAction("Index");
+                return Json(car);
             }
-            return View(car);
+            return Json("");
         }
 
         [HttpGet]
