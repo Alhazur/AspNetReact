@@ -15,7 +15,7 @@ export default function(){
             year: 2019
         },
         {
-            id: ,
+            id: 3,
             model: "R8",
             brand: "Audi",
             year: 2019
