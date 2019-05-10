@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AspNetReact.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class CarController : Controller
     {
         private readonly ICarService _car;
@@ -18,22 +19,13 @@ namespace AspNetReact.Controllers
         {
             return View(_car.Allcars());
         }
+
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-
-        //[HttpPost]
-        //public IActionResult Create(Car car)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        car = _car.CreateCar(car.Name, car.Brand, car.Year);
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(car);
-        //}
+        
 
         [HttpPost]
         public JsonResult Create(Car car)

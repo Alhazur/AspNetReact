@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "ClientApp/src/components/Home.min.js",
+    "inputFiles": [
+      "ClientApp/src/components/Home.js"
+    ]
+  }
+]
