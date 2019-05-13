@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import CarList from "./CarList";
+import CreateCar from "./CreateCar";
 
 class App extends Component {
   state = {
@@ -8,28 +9,36 @@ class App extends Component {
       { id: 1, name: "M5", brand: "BMW", year: "2019" },
       { id: 2, name: "A8", brand: "AUDI", year: "2019" },
       { id: 3, name: "F50", brand: "Ferarri", year: "2019" }
-    ]
+    ],
+    carName: "",
+    carBrand: ""
   };
+
+  handleChange = event => {
+    this.setState({ carName: event.target.value });
+  };
+
+  onSubmit(event) {
+    event.preventDefault();
+  }
 
   handleEdit = () => {
     console.log("Edited");
   };
 
-  handleDelete = id => {
-    const cars = this.state.cars.filter(c => c.id !== id);
-    this.state({ cars });
-    console.log("deleted");
+  handleDelete = carid => {
+    const cars = this.state.cars.filter(c => c.id !== carid);
+    this.setState({ cars: cars });
+    console.log("deleted", carid);
   };
 
   render() {
-    const { cars } = this.state;
     return (
       <div className="App">
         <h1>007'-</h1>
-        <button className="btn btn-success btn-sm" />
-        Create a new car
+        <CreateCar onChange={this.handleChange} onSubmit={this.onSubmit} />
         <CarList
-          carList={cars}
+          cars={this.state.cars}
           onEdit={this.handleEdit}
           onDelete={this.handleDelete}
         />
