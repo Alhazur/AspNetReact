@@ -1,6 +1,7 @@
 ﻿using AspNetReact.Models.Classes;
 using AspNetReact.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace AspNetReact.Controllers
 {
@@ -15,15 +16,10 @@ namespace AspNetReact.Controllers
             _car = car;
         }
 
-        public IActionResult Index()
-        {
-            return View(_car.Allcars());
-        }
-
         [HttpGet]
-        public IActionResult Create()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            return View();
+            return new string[] { "C#", "C++", "Python", "Basic", "VB", "Java" };
         }
         
 
@@ -38,31 +34,25 @@ namespace AspNetReact.Controllers
             return Json("");
         }
 
-        [HttpGet]
-        public IActionResult Edit(int? id)
-        {
-            var car = _car.FindCar((int)id);
-            
-            return View(car);
-        }
 
-        [HttpPost]
+        [HttpPut("{id}")]
         public IActionResult Edit(Car car)
         {
             if (ModelState.IsValid)
             {
                 _car.UpdateCar(car);
-                return RedirectToAction("Index");
+                return Json("Index");
             }
-            return View(car);
+            return Json(car);
         }
 
+        [HttpDelete("{id}")]
         public IActionResult Delete(int? id)
         {
             if (id != null)
             {
                 _car.DeleteCar((int)id);
-                return RedirectToAction("Index");
+                return Json("Index");
             }
             return Content("");
         }

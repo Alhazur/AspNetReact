@@ -6,14 +6,14 @@ class CarList extends Component {
   render() {
     const { cars, onDelete, onEdit } = this.props;
     const carElements = cars.map(car => (
-      <li>
-        {car.name}
-        {car.brand}
-        {car.year}
-        <Car key={car.id} onDelete={onDelete} onEdit={onEdit} cars={cars} />
-      </li>
+      <div key={car.id} className="card">
+        <div className="card-header">
+          {car.name} {car.brand} {car.year}{" "}
+          <Car onDelete={onDelete} onEdit={onEdit} car={car} />
+        </div>
+      </div>
     ));
-    return <ol>{carElements}</ol>;
+    return <p className="card-body">{carElements}</p>;
   }
 }
 

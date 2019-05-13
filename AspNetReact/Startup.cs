@@ -28,6 +28,17 @@ namespace AspNetReact
 
             services.AddScoped<ICarService, CarService>();
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("*")  // only for Dev!!! Not production code!!!
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
+
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -55,6 +66,8 @@ namespace AspNetReact
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseCors();//glöm inte
 
             app.UseMvc(routes =>
             {

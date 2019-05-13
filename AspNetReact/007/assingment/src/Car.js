@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CarList from "./CarList";
 
 class Car extends Component {
   render() {
@@ -13,13 +12,13 @@ class Car extends Component {
           </li>
         ))} */}
         <button
-          onClick={() => this.props.onEdit}
+          onClick={() => this.props.onEdit(this.props.car)}
           className="btn btn-primary btn-sm m-1"
         >
           Edit
         </button>
         <button
-          onClick={() => this.props.onDelete(this.props.id)}
+          onClick={() => this.props.onDelete(this.props.car.id)}
           className="btn btn-danger btn-sm m-1"
         >
           Delete
