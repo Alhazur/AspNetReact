@@ -6,20 +6,33 @@ class CarList extends Component {
   render() {
     const { cars, onDelete, onEdit } = this.props;
     const carElements = cars.map(car => (
-      <div key={car.id} className="card">
+      <tbody className="card-body">
+        <tr key={car.id}>
+          <td>{car.name}</td>
+          <td>{car.brand}</td>
+          <td>{car.year}</td>
+          <td>
+            <Car onDelete={onDelete} onEdit={onEdit} car={car} />
+          </td>
+        </tr>
+      </tbody>
+    ));
+    return <section>{carElements}</section>;
+  }
+}
+
+export default CarList;
+
+{
+  /* <div key={car.id} className="card">
         <div className="card-header">
           <Car onDelete={onDelete} onEdit={onEdit} car={car} />
         </div>
         <div className="card-body">
           {car.name} {car.brand} {car.year}{" "}
         </div>
-      </div>
-    ));
-    return <section className="card-body">{carElements}</section>;
-  }
+      </div> */
 }
-
-export default CarList;
 
 // <section className="card-body">{carElements}</section>;
 

@@ -5,6 +5,7 @@ import CarList from "./CarList";
 import CreateCar from "./CreateCar";
 import CarEdit from "./CarEdit";
 import CarSort from "./CarSort";
+import NavBar from "./NavBar";
 
 class App extends Component {
   state = {
@@ -53,7 +54,6 @@ class App extends Component {
     let sortCar = [...this.state.cars];
     sortCar.sort(this.compareBy(key));
     this.setState({ cars: sortCar });
-    console.log("sortby: ", key);
   };
 
   onSubmit = event => {
@@ -106,15 +106,20 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <CreateCar onSubmit={this.onSubmit} />
-        <CarSort onSortBy={this.sortBy} />
-        <CarList
-          cars={this.state.cars}
-          onEdit={this.handleEdit}
-          onDelete={this.handleDelete}
-        />
-      </div>
+      <React.Fragment>
+        <NavBar />
+        <div className="App">
+          <CreateCar onSubmit={this.onSubmit} />
+          <table>
+            <CarSort onSortBy={this.sortBy} />
+            <CarList
+              cars={this.state.cars}
+              onEdit={this.handleEdit}
+              onDelete={this.handleDelete}
+            />
+          </table>
+        </div>
+      </React.Fragment>
     );
   }
 }
