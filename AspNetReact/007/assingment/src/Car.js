@@ -4,13 +4,6 @@ class Car extends Component {
   render() {
     return (
       <div>
-        {/* {this.props.map(car => (
-          <li>
-            {car.name}
-            {car.brand}
-            {car.year}
-          </li>
-        ))} */}
         <button
           onClick={() => this.props.onEdit(this.props.car)}
           className="btn btn-primary btn-sm m-1"

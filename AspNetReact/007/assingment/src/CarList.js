@@ -8,76 +8,54 @@ class CarList extends Component {
     const carElements = cars.map(car => (
       <div key={car.id} className="card">
         <div className="card-header">
-          {car.name} {car.brand} {car.year}{" "}
           <Car onDelete={onDelete} onEdit={onEdit} car={car} />
+        </div>
+        <div className="card-body">
+          {car.name} {car.brand} {car.year}{" "}
         </div>
       </div>
     ));
-    return <p className="card-body">{carElements}</p>;
+    return <section className="card-body">{carElements}</section>;
   }
 }
 
 export default CarList;
 
-// render() {
-//   return (
-//     <div>
-//       {this.props.map(car => (
-//         <Car
-//           key={car.id}
-//           onDelete={this.props.onDelete}
-//           onEdit={this.props.onEdit}
-//           car={car}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
+// <section className="card-body">{carElements}</section>;
 
-//  const CarList = props => {
-//    return (
-//      <div>
-//        <table>
-//          <thead>
-//            <tr>
-//              <th>Name</th>
-//              <th>Brand</th>
-//              <th>Year</th>
-//              <th>Options</th>
-//            </tr>
-//          </thead>
-//          <tbody>
-//            {props.cars.length > 0 ? (
-//              props.cars.map((row, index) => (
-//                <tr key={index}>
-//                  <td>{row.name}</td>
-//                  <td>{row.brand}</td>
-//                  <td>{row.year}</td>
-//                  <td>
-//                    <button
-//                      onClick={props.onEdit}
-//                      className="btn btn-primary btn-sm m-1"
-//                    >
-//                      Edit
-//                    </button>
-//                    <button
-//                      onClick={() => props.onDelete(this.props.id)}
-//                      className="btn btn-danger btn-sm m-1"
-//                    >
-//                      Delete
-//                    </button>
-//                  </td>
-//                </tr>
-//              ))
-//            ) : (
-//              <tr>
-//                <td colSpan={3}>No cars</td>
-//              </tr>
-//            )}
-//          </tbody>
-//        </table>
-//      </div>
-//    );
-//  };
-
-//  export default CarList;
+// (
+//   <div>
+//     <table>
+//       <thead>
+//         <tr>
+//           <th>Name</th>
+//           <th>Brand</th>
+//           <th>Year</th>
+//           <th>Options</th>
+//         </tr>
+//       </thead>
+//       <tbody>
+//         {this.props.cars.length > 0 ? (
+//           this.props.cars.map(car => (
+//             <tr key={car.id}>
+//               <td>{car.name}</td>
+//               <td>{car.brand}</td>
+//               <td>{car.year}</td>
+//               <td>
+//                 <Car
+//                   onDelete={this.props.onDelete}
+//                   onEdit={this.props.onEdit}
+//                   car={this.props.car}
+//                 />
+//               </td>
+//             </tr>
+//           ))
+//         ) : (
+//           <tr>
+//             <td colSpan={3}>No cars</td>
+//           </tr>
+//         )}
+//       </tbody>
+//     </table>
+//   </div>
+// );

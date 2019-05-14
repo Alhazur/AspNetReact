@@ -25,7 +25,7 @@ class CreateCar extends Component {
               <div className="col-3">
                 <div className="form-group">
                   <button type="submit" className="btn btn-success btn-sm">
-                    Create Car<span class="spinner-grow spinner-grow-sm" />
+                    Create Car
                   </button>
                 </div>
               </div>

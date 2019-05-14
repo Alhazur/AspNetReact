@@ -4,6 +4,7 @@ import axios from "axios";
 import CarList from "./CarList";
 import CreateCar from "./CreateCar";
 import CarEdit from "./CarEdit";
+import CarSort from "./CarSort";
 
 class App extends Component {
   state = {
@@ -28,23 +29,32 @@ class App extends Component {
         function(error) {
           this.setState({ dataFail: true });
           if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
             this.setState({
               dataMsg: "Sever Access Denied: " + error.response.status
             });
           } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
             this.setState({ dataMsg: "Sever dident respond" });
           } else {
-            // Something happened in setting up the request that triggered an Error
             this.setState({ dataMsg: "Failed to send request" });
           }
         }.bind(this)
       );
   }
+
+  compareBy = key => {
+    return function(a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  };
+
+  sortBy = key => {
+    let sortCar = [...this.state.cars];
+    sortCar.sort(this.compareBy(key));
+    this.setState({ cars: sortCar });
+    console.log("sortby: ", key);
+  };
 
   onSubmit = event => {
     event.preventDefault();
@@ -67,12 +77,12 @@ class App extends Component {
     let oldCar = this.state.cars.find(c => c.id === car.id);
 
     oldCar = {
+      id: car.id,
       name: car.name,
       brand: car.brand,
       year: car.year
     };
     const cars = this.state.cars.filter(c => c.id !== car.id);
-    console.log(cars);
 
     cars.push(oldCar);
     this.setState({ cars, editCar: false });
@@ -98,6 +108,7 @@ class App extends Component {
     return (
       <div className="App">
         <CreateCar onSubmit={this.onSubmit} />
+        <CarSort onSortBy={this.sortBy} />
         <CarList
           cars={this.state.cars}
           onEdit={this.handleEdit}
