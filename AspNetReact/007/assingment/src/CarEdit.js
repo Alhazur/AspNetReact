@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 class CarEdit extends Component {
   constructor(props) {
+    super(props);
     const { oneCar } = this.props;
     const { id, name, brand, year } = oneCar;
 
-    super(props);
     this.state = {
       oneCar: oneCar,
       id: id,
@@ -72,7 +72,12 @@ class CarEdit extends Component {
           >
             Save
           </button>
-          <button className="btn btn-secondary">Cancel</button>
+          <button
+            onClick={this.props.onCancelOut}
+            className="btn btn-secondary"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     );

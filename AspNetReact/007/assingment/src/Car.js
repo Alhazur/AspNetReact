@@ -12,7 +12,7 @@ class Car extends Component {
         </button>
         <button
           onClick={() => this.props.onDetails(this.props.car)}
-          className="btn btn-primary btn-sm m-1"
+          className="btn btn-info btn-sm m-1"
         >
           Details
         </button>

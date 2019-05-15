@@ -48,12 +48,11 @@ class CarDetails extends Component {
             </div>
           </div>
           <button
-            className="btn btn-primary m-3"
-            // onClick={() => this.props.onSubmit({ id, name, brand, year })}
+            onClick={this.props.onCancelOut}
+            className="btn btn-secondary"
           >
-            Save
+            Cancel
           </button>
-          <button className="btn btn-secondary">Cancel</button>
         </div>
       </div>
     );

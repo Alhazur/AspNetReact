@@ -88,9 +88,19 @@ class App extends Component {
       year: car.year
     };
     const cars = this.state.cars.filter(c => c.id !== car.id);
+    //API
+    console.log("Edited", cars);
+    axios.put(`https://localhost:44309//api/Car/`, oldCar).then(res => {
+      const newCar = res.data;
+      console.log(newCar);
+    });
 
     cars.push(oldCar);
     this.setState({ cars, editCar: false });
+  };
+
+  handleCancel = () => {
+    this.setState({ editCar: false, detailsCar: false });
   };
 
   handleEdit = car => {
@@ -103,22 +113,28 @@ class App extends Component {
 
   handleDelete = carid => {
     const cars = this.state.cars.filter(c => c.id !== carid);
-    this.setState({ cars: cars });
+    this.setState({ cars });
+    axios.delete(`https://localhost:44309//api/Car/` + carid);
     console.log("Was deleted", carid);
-    axios.delete(`https://localhost:44309//api/Car/` + carid).then(res => {
-      const cars = res.data;
-    });
   };
 
   render() {
     if (this.state.editCar === true) {
       return (
-        <CarEdit oneCar={this.state.oneCar} onSubmit={this.onEditSubmit} />
+        <CarEdit
+          oneCar={this.state.oneCar}
+          onSubmit={this.onEditSubmit}
+          onCancelOut={this.handleCancel}
+        />
       );
     }
     if (this.state.detailsCar === true) {
       return (
-        <CarDetails oneCar={this.state.oneCar} onDetails={this.handleDetails} />
+        <CarDetails
+          oneCar={this.state.oneCar}
+          onDetails={this.handleDetails}
+          onCancelOut={this.handleCancel}
+        />
       );
     }
 
@@ -127,14 +143,15 @@ class App extends Component {
         <NavBar />
         <div className="App">
           <CreateCar onSubmit={this.onSubmit} />
-
-          <CarSort onSortBy={this.sortBy} />
-          <CarList
-            cars={this.state.cars}
-            onEdit={this.handleEdit}
-            onDetails={this.handleDetails}
-            onDelete={this.handleDelete}
-          />
+          <table>
+            <CarSort onSortBy={this.sortBy} />
+            <CarList
+              cars={this.state.cars}
+              onEdit={this.handleEdit}
+              onDetails={this.handleDetails}
+              onDelete={this.handleDelete}
+            />
+          </table>
         </div>
       </React.Fragment>
     );
