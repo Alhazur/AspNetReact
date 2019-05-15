@@ -6,6 +6,7 @@ import CreateCar from "./CreateCar";
 import CarEdit from "./CarEdit";
 import CarSort from "./CarSort";
 import NavBar from "./NavBar";
+import CarDetails from "./CarDetails";
 
 class App extends Component {
   state = {
@@ -15,6 +16,7 @@ class App extends Component {
       { id: 3, name: "F50", brand: "Ferarri", year: "2019" }
     ],
     editCar: false,
+    detailsCar: false,
     oneCar: [],
     dataFail: false,
     dataMsg: null
@@ -66,11 +68,14 @@ class App extends Component {
       brand: target.brand.value,
       year: target.year.value
     };
+    axios.post(`https://localhost:44309//api/Car/`, car).then(res => {
+      const newCar = res.data;
+      console.log(newCar);
+      const { cars } = this.state;
 
-    const { cars } = this.state;
-
-    cars.push(car);
-    this.setState({ cars, id: this.state.id + 1 });
+      cars.push(newCar);
+      this.setState({ cars });
+    });
   };
 
   onEditSubmit = car => {
@@ -92,10 +97,17 @@ class App extends Component {
     this.setState({ editCar: true, oneCar: car });
   };
 
+  handleDetails = car => {
+    this.setState({ detailsCar: true, oneCar: car });
+  };
+
   handleDelete = carid => {
     const cars = this.state.cars.filter(c => c.id !== carid);
     this.setState({ cars: cars });
     console.log("Was deleted", carid);
+    axios.delete(`https://localhost:44309//api/Car/` + carid).then(res => {
+      const cars = res.data;
+    });
   };
 
   render() {
@@ -104,20 +116,25 @@ class App extends Component {
         <CarEdit oneCar={this.state.oneCar} onSubmit={this.onEditSubmit} />
       );
     }
+    if (this.state.detailsCar === true) {
+      return (
+        <CarDetails oneCar={this.state.oneCar} onDetails={this.handleDetails} />
+      );
+    }
 
     return (
       <React.Fragment>
         <NavBar />
         <div className="App">
           <CreateCar onSubmit={this.onSubmit} />
-          <table>
-            <CarSort onSortBy={this.sortBy} />
-            <CarList
-              cars={this.state.cars}
-              onEdit={this.handleEdit}
-              onDelete={this.handleDelete}
-            />
-          </table>
+
+          <CarSort onSortBy={this.sortBy} />
+          <CarList
+            cars={this.state.cars}
+            onEdit={this.handleEdit}
+            onDetails={this.handleDetails}
+            onDelete={this.handleDelete}
+          />
         </div>
       </React.Fragment>
     );

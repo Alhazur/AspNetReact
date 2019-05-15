@@ -17,9 +17,11 @@ namespace AspNetReact.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IEnumerable<Car> Get()
         {
-            return new string[] { "C#", "C++", "Python", "Basic", "VB", "Java" };
+            var cars = _car.Allcars();
+
+            return cars;
         }
         
 
@@ -36,7 +38,7 @@ namespace AspNetReact.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult Edit(Car car)
+        public JsonResult Edit(Car car)
         {
             if (ModelState.IsValid)
             {
@@ -47,14 +49,14 @@ namespace AspNetReact.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int? id)
+        public JsonResult Delete(int? id)
         {
             if (id != null)
             {
                 _car.DeleteCar((int)id);
                 return Json("Index");
             }
-            return Content("");
+            return Json("");
         }
 
         public IActionResult Details(int? id)

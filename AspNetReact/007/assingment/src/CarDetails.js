@@ -1,35 +1,19 @@
 import React, { Component } from "react";
 
-class CarEdit extends Component {
+class CarDetails extends Component {
   constructor(props) {
-    const { oneCar } = this.props;
-    const { id, name, brand, year } = oneCar;
-
     super(props);
+    const { oneCar } = this.props;
+
     this.state = {
-      oneCar: oneCar,
-      id: id,
-      name: name,
-      brand: brand,
-      year: year
+      oneCar: oneCar
     };
   }
-
-  handleChange = event => {
-    const { name, value } = event.target;
-
-    this.setState({
-      [name]: value
-    });
-  };
-
   render() {
-    const { id, name, brand, year } = this.state;
-
+    const { name, brand, year } = this.state.oneCar;
     return (
       <div>
         <div className="card-header">
-          <input type="hidden" name="id" value={id} />
           <div className="form-group">
             <div className="col-4">
               <label>Name: </label>
@@ -38,7 +22,6 @@ class CarEdit extends Component {
                 name="name"
                 value={name}
                 className="form-control"
-                onChange={this.handleChange}
               />
             </div>
           </div>
@@ -50,7 +33,6 @@ class CarEdit extends Component {
                 name="brand"
                 value={brand}
                 className="form-control"
-                onChange={this.handleChange}
               />
             </div>
           </div>
@@ -62,13 +44,12 @@ class CarEdit extends Component {
                 name="year"
                 value={year}
                 className="form-control"
-                onChange={this.handleChange}
               />
             </div>
           </div>
           <button
             className="btn btn-primary m-3"
-            onClick={() => this.props.onSubmit({ id, name, brand, year })}
+            // onClick={() => this.props.onSubmit({ id, name, brand, year })}
           >
             Save
           </button>
@@ -79,4 +60,4 @@ class CarEdit extends Component {
   }
 }
 
-export default CarEdit;
+export default CarDetails;

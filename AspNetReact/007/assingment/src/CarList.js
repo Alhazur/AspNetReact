@@ -4,7 +4,7 @@ import Car from "./Car";
 
 class CarList extends Component {
   render() {
-    const { cars, onDelete, onEdit } = this.props;
+    const { cars, onDelete, onEdit, onDetails } = this.props;
     const carElements = cars.map(car => (
       <tbody className="card-body">
         <tr key={car.id}>
@@ -12,19 +12,23 @@ class CarList extends Component {
           <td>{car.brand}</td>
           <td>{car.year}</td>
           <td>
-            <Car onDelete={onDelete} onEdit={onEdit} car={car} />
+            <Car
+              onDelete={onDelete}
+              onDetails={onDetails}
+              onEdit={onEdit}
+              car={car}
+            />
           </td>
         </tr>
       </tbody>
     ));
-    return <section>{carElements}</section>;
+    return <div>{carElements}</div>;
   }
 }
 
 export default CarList;
 
-{
-  /* <div key={car.id} className="card">
+/* <div key={car.id} className="card">
         <div className="card-header">
           <Car onDelete={onDelete} onEdit={onEdit} car={car} />
         </div>
@@ -32,7 +36,6 @@ export default CarList;
           {car.name} {car.brand} {car.year}{" "}
         </div>
       </div> */
-}
 
 // <section className="card-body">{carElements}</section>;
 

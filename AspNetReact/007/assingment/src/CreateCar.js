@@ -5,7 +5,7 @@ class CreateCar extends Component {
     return (
       <form onSubmit={this.props.onSubmit} key={indexedDB}>
         <div className="card-header m-4">
-          <div className="col-12">
+          <div className="col-8">
             <div className="row">
               <div className="col-3">
                 <div className="form-group">

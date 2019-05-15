@@ -11,6 +11,12 @@ class Car extends Component {
           Edit
         </button>
         <button
+          onClick={() => this.props.onDetails(this.props.car)}
+          className="btn btn-primary btn-sm m-1"
+        >
+          Details
+        </button>
+        <button
           onClick={() => this.props.onDelete(this.props.car.id)}
           className="btn btn-danger btn-sm m-1"
         >
@@ -22,5 +28,3 @@ class Car extends Component {
 }
 
 export default Car;
-
-//<h3>{new Date().toDateString()}</h3>;
