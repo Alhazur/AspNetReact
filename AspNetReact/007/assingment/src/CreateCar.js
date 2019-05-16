@@ -4,7 +4,7 @@ class CreateCar extends Component {
   render() {
     return (
       <form onSubmit={this.props.onSubmit}>
-        <div className="card-header m-4">
+        <div>
           <div className="col-8">
             <div className="row">
               <div className="col-3">
@@ -22,8 +22,16 @@ class CreateCar extends Component {
                 <div className="form-group">
                   <label>Choose a brand:</label>
                   <select onChange={this.props.onChange}>
-                    <option value="">--Please choose an option--</option>
-                    <option value="Dog">Dog</option>
+                    <option value="">Please choose a brand</option>
+                    <option value="Some car">Some car</option>
+                    {/* <select onChange={this.props.onChange}>
+                    <option value="">Please choose a brand</option>
+                    {this.props.BrandOfCars.map((brands, index) => {
+                      <option name="brands" key={index}>
+                        {brands}
+                      </option>;
+                    })}
+                  </select> */}
                   </select>
                 </div>
               </div>

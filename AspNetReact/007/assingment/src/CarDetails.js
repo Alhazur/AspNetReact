@@ -12,51 +12,46 @@ class CarDetails extends Component {
   render() {
     const { name, brand, year } = this.state.oneCar;
     return (
-      <div>
-        <div className="card-header">
-          <div className="form-group">
-            <div className="col-4">
-              <label>Name: </label>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                className="form-control"
-                class="list-group-item disabled"
-              />
-            </div>
+      <div className="card-header">
+        <div className="form-group">
+          <div className="col-4">
+            <label>Name: </label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              className="form-control"
+              class="list-group-item disabled"
+            />
           </div>
-          <div className="form-group">
-            <div className="col-4">
-              <label>Brand: </label>
-              <input
-                type="text"
-                name="brand"
-                value={brand}
-                className="form-control"
-                class="list-group-item disabled"
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-4">
-              <label>Year: </label>
-              <input
-                type="text"
-                name="year"
-                value={year}
-                className="form-control"
-                class="list-group-item disabled"
-              />
-            </div>
-          </div>
-          <button
-            onClick={this.props.onCancelOut}
-            className="btn btn-secondary"
-          >
-            Cancel
-          </button>
         </div>
+        <div className="form-group">
+          <div className="col-4">
+            <label>Brand: </label>
+            <input
+              type="text"
+              name="brand"
+              value={brand}
+              className="form-control"
+              class="list-group-item disabled"
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-4">
+            <label>Year: </label>
+            <input
+              type="text"
+              name="year"
+              value={year}
+              className="form-control"
+              class="list-group-item disabled"
+            />
+          </div>
+        </div>
+        <button onClick={this.props.onCancelOut} className="btn btn-secondary">
+          Cancel
+        </button>
       </div>
     );
   }

@@ -32,17 +32,6 @@
   }
 }
 
-th,
-td {
-}
-
-th {
-}
-
-td {
-  padding-left: 100px;
-}
-
 .table {
   margin: 1em;
   display: flex;

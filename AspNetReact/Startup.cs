@@ -20,10 +20,10 @@ namespace AspNetReact
         }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CarDbContext>(options => 
+            services.AddDbContext<CarDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ICarService, CarService>();
@@ -74,6 +74,8 @@ namespace AspNetReact
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+                routes.MapRoute("Car", "Car/{*article}",//x2
+               defaults: new { controller = "Car", action = "GetBrands" });
             });
 
             app.UseSpa(spa =>

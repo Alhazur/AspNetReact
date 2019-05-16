@@ -12,8 +12,8 @@ class App extends Component {
   state = {
     cars: [
       { id: 1, name: "M5", brand: "BMW", year: "2019" },
-      { id: 2, name: "A8", brand: "AUDI", year: "2019" },
-      { id: 3, name: "F50", brand: "Ferarri", year: "2019" }
+      { id: 2, name: "A8", brand: "AUDI", year: "2020" },
+      { id: 3, name: "Huracan", brand: "Lamborghini", year: "2016" }
     ],
     oneCar: [],
     editCar: false,
@@ -62,13 +62,12 @@ class App extends Component {
 
   handleBrand = event => {
     const { value } = event.target;
-    axios.get(`https://localhost:44309/api/Car`).then(res => {
-      const cars = res.data;
-      console.log("Enum");
-      this.setState({ cars });
-    });
     console.log("handleBrand called ++" + value);
     this.setState({ BrandOfCars: value });
+    axios.get(`https://localhost:44309/api/Car/GetBrands`, value).then(res => {
+      const cars = res.data;
+      this.setState({ BrandOfCars: cars });
+    });
   };
 
   onSubmit = event => {
