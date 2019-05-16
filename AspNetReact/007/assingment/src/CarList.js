@@ -1,33 +1,16 @@
 import React, { Component } from "react";
 import Car from "./Car";
-//import Car from "./CreateCar";
+import CarBrands from "./CarBrands";
 
 class CarList extends Component {
   render() {
     const { cars, onDelete, onEdit, onDetails } = this.props;
-    // const carElements = cars.map(car => (
-    //   <tbody className="card-body">
-    //     <tr key={car.id}>
-    //       <td>{car.name}</td>
-    //       <td>{car.brand}</td>
-    //       <td>{car.year}</td>
-    //       <td>
-    //         <Car
-    //           onDelete={onDelete}
-    //           onDetails={onDetails}
-    //           onEdit={onEdit}
-    //           car={car}
-    //         />
-    //       </td>
-    //     </tr>
-    //   </tbody>
-    //));
     return (
       <div>
         <tbody>
           {cars.length > 0 ? (
             cars.map(car => (
-              <tr key={car.id} class="table-secondary">
+              <tr key={car.id} className="table-secondary">
                 <td>{car.name}</td>
                 <td>{car.brand}</td>
                 <td>{car.year}</td>

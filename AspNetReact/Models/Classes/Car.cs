@@ -12,9 +12,19 @@ namespace AspNetReact.Models.Classes
         [Required]
         public string Name { get; set; }
         [Required]
-        public string Brand { get; set; }
+        public BrandOfCars Brand { get; set; }
         [Required]
         public int Year { get; set; }
 
+    }
+
+    public enum BrandOfCars
+    {
+        Mercedes,
+        Audi,
+        Bmw,
+        Pagani,
+        Porsche,
+        Lamborghini
     }
 }

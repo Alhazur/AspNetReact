@@ -15,17 +15,19 @@ class App extends Component {
       { id: 2, name: "A8", brand: "AUDI", year: "2019" },
       { id: 3, name: "F50", brand: "Ferarri", year: "2019" }
     ],
-    editCar: false,
-    detailsCar: false,
     oneCar: [],
+    editCar: false,
     dataFail: false,
-    dataMsg: null
+    detailsCar: false,
+    dataMsg: null,
+    BrandOfCars: []
   };
   componentDidMount() {
     axios
-      .get(`https://localhost:44309//api/Car`)
+      .get(`https://localhost:44309/api/Car`)
       .then(res => {
         const cars = res.data;
+        console.log("I happen");
         this.setState({ cars });
       })
       .catch(
@@ -58,6 +60,17 @@ class App extends Component {
     this.setState({ cars: sortCar });
   };
 
+  handleBrand = event => {
+    const { value } = event.target;
+    axios.get(`https://localhost:44309/api/Car`).then(res => {
+      const cars = res.data;
+      console.log("Enum");
+      this.setState({ cars });
+    });
+    console.log("handleBrand called ++" + value);
+    this.setState({ BrandOfCars: value });
+  };
+
   onSubmit = event => {
     event.preventDefault();
 
@@ -65,10 +78,13 @@ class App extends Component {
 
     const car = {
       name: target.name.value,
-      brand: target.brand.value,
+      brand: this.state.BrandOfCars, //?????????????????????
       year: target.year.value
     };
-    axios.post(`https://localhost:44309//api/Car/`, car).then(res => {
+    console.log("Enum Brands", this.state.BrandOfCars.value);
+    console.log(car);
+    //
+    axios.post(`https://localhost:44309/api/Car/`, car).then(res => {
       const newCar = res.data;
       console.log(newCar);
       const { cars } = this.state;
@@ -88,7 +104,7 @@ class App extends Component {
       year: car.year
     };
     const cars = this.state.cars.filter(c => c.id !== car.id);
-    //API
+    //API??????????
     console.log("Edited", cars);
     axios.put(`https://localhost:44309//api/Car/`, oldCar).then(res => {
       const newCar = res.data;
@@ -142,11 +158,12 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <div className="App">
-          <CreateCar onSubmit={this.onSubmit} />
+          <CreateCar onSubmit={this.onSubmit} onChange={this.handleBrand} />
           <table>
             <CarSort onSortBy={this.sortBy} />
             <CarList
               cars={this.state.cars}
+              brand={this.state.brand}
               onEdit={this.handleEdit}
               onDetails={this.handleDetails}
               onDelete={this.handleDelete}

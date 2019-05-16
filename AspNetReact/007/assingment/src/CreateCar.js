@@ -3,23 +3,39 @@ import React, { Component } from "react";
 class CreateCar extends Component {
   render() {
     return (
-      <form onSubmit={this.props.onSubmit} key={indexedDB}>
+      <form onSubmit={this.props.onSubmit}>
         <div className="card-header m-4">
           <div className="col-8">
             <div className="row">
               <div className="col-3">
                 <div className="form-group">
-                  <input type="text" name="name" placeholder="Car Name:" />
+                  <label>Name: </label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Car Name:"
+                    required
+                  />
                 </div>
               </div>
               <div className="col-3">
                 <div className="form-group">
-                  <input type="text" name="brand" placeholder="Car Brand:" />
+                  <label>Choose a brand:</label>
+                  <select onChange={this.props.onChange}>
+                    <option value="">--Please choose an option--</option>
+                    <option value="Dog">Dog</option>
+                  </select>
                 </div>
               </div>
               <div className="col-3">
                 <div className="form-group">
-                  <input type="text" name="year" placeholder="Car Year:" />
+                  <label>Year: </label>
+                  <input
+                    type="text"
+                    name="year"
+                    placeholder="Car Year:"
+                    required
+                  />
                 </div>
               </div>
               <div className="col-3">

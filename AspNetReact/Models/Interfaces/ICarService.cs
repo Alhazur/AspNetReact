@@ -8,7 +8,7 @@ namespace AspNetReact.Models.Interfaces
 {
     public interface ICarService
     {
-        Car CreateCar(string name, string brand, int year);
+        Car CreateCar(string name, BrandOfCars brand, int year);
 
         List<Car> Allcars();
 

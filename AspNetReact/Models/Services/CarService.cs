@@ -21,7 +21,7 @@ namespace AspNetReact.Models.Services
             return _carDbcontext.Cars.ToList();
         }
 
-        public Car CreateCar(string name, string brand, int year)
+        public Car CreateCar(string name, BrandOfCars brand, int year)
         {
             Car car = new Car() { Name = name, Brand = brand, Year = year };
 

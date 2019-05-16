@@ -1,14 +1,18 @@
 ﻿using AspNetReact.Models.Classes;
 using AspNetReact.Models.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace AspNetReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors]
     public class CarController : Controller
     {
+
         private readonly ICarService _car;
 
         public CarController(ICarService car)
@@ -24,7 +28,6 @@ namespace AspNetReact.Controllers
             return cars;
         }
         
-
         [HttpPost]
         public JsonResult Create(Car car)
         {
@@ -36,6 +39,11 @@ namespace AspNetReact.Controllers
             return Json("");
         }
 
+        [HttpGet]
+        public JsonResult GetBrands()
+        {
+            return Json(Enum.GetNames(typeof(BrandOfCars)));
+        }
 
         [HttpPut("{id}")]
         public JsonResult Edit(Car car)
@@ -58,21 +66,6 @@ namespace AspNetReact.Controllers
             }
             return Json("");
         }
-
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var car = _car.FindCar((int)id);
-
-            if (car == null)
-            {
-                return NotFound();
-            }
-            return View(car);
-        }
+       
     }
 }
