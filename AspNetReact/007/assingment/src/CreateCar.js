@@ -24,7 +24,8 @@ class CreateCar extends Component {
                   <select onChange={this.props.onChange}>
                     <option value="">Please choose a brand</option>
                     <option value="Some car">Some car</option>
-                    {/* <select onChange={this.props.onChange}>
+                  </select>
+                  {/* <select onChange={this.props.onChange}>
                     <option value="">Please choose a brand</option>
                     {this.props.BrandOfCars.map((brands, index) => {
                       <option name="brands" key={index}>
@@ -32,7 +33,6 @@ class CreateCar extends Component {
                       </option>;
                     })}
                   </select> */}
-                  </select>
                 </div>
               </div>
               <div className="col-3">

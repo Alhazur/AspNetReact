@@ -39,15 +39,6 @@ namespace AspNetReact.Controllers
             return Json("");
         }
 
-        [HttpGet]
-        [Route("Car/GetBrands")]
-        [ActionName("GetBrands")]
-        //[HttpGet("{Car}")]
-        public JsonResult GetBrands()
-        {
-            return Json(Enum.GetNames(typeof(BrandOfCars)));
-        }
-
         [HttpPut("{id}")]
         public JsonResult Edit(Car car)
         {

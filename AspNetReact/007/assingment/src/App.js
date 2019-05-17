@@ -11,9 +11,9 @@ import CarDetails from "./CarDetails";
 class App extends Component {
   state = {
     cars: [
-      { id: 1, name: "M5", brand: "BMW", year: "2019" },
-      { id: 2, name: "A8", brand: "AUDI", year: "2020" },
-      { id: 3, name: "Huracan", brand: "Lamborghini", year: "2016" }
+      { id: 1, name: "M5", brand: "BMW", year: 2019 },
+      { id: 2, name: "A8", brand: "AUDI", year: 2020 },
+      { id: 3, name: "Huracan", brand: "Lamborghini", year: 2016 }
     ],
     oneCar: [],
     editCar: false,
@@ -27,7 +27,6 @@ class App extends Component {
       .get(`https://localhost:44309/api/Car`)
       .then(res => {
         const cars = res.data;
-        console.log("I happen");
         this.setState({ cars });
       })
       .catch(
@@ -44,6 +43,27 @@ class App extends Component {
           }
         }.bind(this)
       );
+    axios
+      .get(`https://localhost:44309/api/Brand/`)
+      .then(res => {
+        const cars = res.data;
+        this.setState({ BrandOfCars: cars });
+      })
+      .catch(
+        function(error) {
+          this.setState({ dataFail: true });
+          if (error.response) {
+            this.setState({
+              dataMsg: "Sever Access Denied: " + error.response.status
+            });
+          } else if (error.request) {
+            this.setState({ dataMsg: "Sever dident respond" });
+          } else {
+            this.setState({ dataMsg: "Failed to send request" });
+          }
+        }.bind(this)
+      );
+    console.log("I'm her and maybe happy");
   }
 
   compareBy = key => {
@@ -62,12 +82,8 @@ class App extends Component {
 
   handleBrand = event => {
     const { value } = event.target;
-    console.log("handleBrand called ++" + value);
+    console.log("handleBrand called: " + value);
     this.setState({ BrandOfCars: value });
-    axios.get(`https://localhost:44309/api/Car/GetBrands`, value).then(res => {
-      const cars = res.data;
-      this.setState({ BrandOfCars: cars });
-    });
   };
 
   onSubmit = event => {
@@ -80,12 +96,12 @@ class App extends Component {
       brand: this.state.BrandOfCars, //?????????????????????
       year: target.year.value
     };
-    console.log("Enum Brands", this.state.BrandOfCars.value);
-    console.log(car);
+    console.log("onSubmit: choose brand: ", car);
+
     //
     axios.post(`https://localhost:44309/api/Car/`, car).then(res => {
       const newCar = res.data;
-      console.log(newCar);
+      console.log("Done car: ", newCar);
       const { cars } = this.state;
 
       cars.push(newCar);
