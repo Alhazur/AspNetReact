@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Car from "./Car";
-//import CarBrands from "./CarBrands";
 
 class CarList extends Component {
   render() {

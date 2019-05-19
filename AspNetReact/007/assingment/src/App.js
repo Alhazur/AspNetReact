@@ -20,7 +20,8 @@ class App extends Component {
     dataFail: false,
     detailsCar: false,
     dataMsg: null,
-    BrandOfCars: []
+    BrandOfCars: [],
+    brand: ""
   };
   componentDidMount() {
     axios
@@ -83,7 +84,7 @@ class App extends Component {
   handleBrand = event => {
     const { value } = event.target;
     console.log("handleBrand called: " + value);
-    this.setState({ BrandOfCars: value });
+    this.setState({ brand: value });
   };
 
   onSubmit = event => {
@@ -93,7 +94,7 @@ class App extends Component {
 
     const car = {
       name: target.name.value,
-      brand: this.state.BrandOfCars, //?????????????????????
+      brand: this.state.brand, //?????????????????????
       year: target.year.value
     };
     console.log("onSubmit: choose brand: ", car);
@@ -173,7 +174,11 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <div className="App">
-          <CreateCar onSubmit={this.onSubmit} onChange={this.handleBrand} />
+          <CreateCar
+            onSubmit={this.onSubmit}
+            onChange={this.handleBrand}
+            BrandOfCars={this.state.BrandOfCars}
+          />
           <table>
             <CarSort onSortBy={this.sortBy} />
             <CarList

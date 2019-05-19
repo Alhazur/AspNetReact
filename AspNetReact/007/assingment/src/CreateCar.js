@@ -27,9 +27,9 @@ class CreateCar extends Component {
                   </select>
                   {/* <select onChange={this.props.onChange}>
                     <option value="">Please choose a brand</option>
-                    {this.props.BrandOfCars.map((brands, index) => {
-                      <option name="brands" key={index}>
-                        {brands}
+                    {this.props.BrandOfCars.map((brand, index) => {
+                      <option name="brand" key={index}>
+                        {brand}
                       </option>;
                     })}
                   </select> */}
