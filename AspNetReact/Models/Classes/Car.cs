@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,6 +20,7 @@ namespace AspNetReact.Models.Classes
 
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum BrandOfCars
     {
         Mercedes,

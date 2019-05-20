@@ -5,13 +5,13 @@ class CarList extends Component {
   render() {
     const { cars, onDelete, onEdit, onDetails } = this.props;
     return (
-      <tbody>
+      <tbody className="card-body">
         {cars.length > 0 ? (
-          cars.map(car => (
-            <tr key={car.id} className="table-secondary">
-              <td className="xxx">{car.name}</td>
-              <td className="xxx">{car.brand}</td>
-              <td className="xxx">{car.year}</td>
+          cars.map((car, index) => (
+            <tr key={index} className="table-secondary">
+              <td>{car.name}</td>
+              <td>{car.brand}</td>
+              <td>{car.year}</td>
               <td>
                 <Car
                   onDelete={onDelete}

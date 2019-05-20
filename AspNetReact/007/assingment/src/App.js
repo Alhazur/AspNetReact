@@ -20,8 +20,7 @@ class App extends Component {
     dataFail: false,
     detailsCar: false,
     dataMsg: null,
-    BrandOfCars: [],
-    brand: ""
+    BrandOfCars: []
   };
   componentDidMount() {
     axios
@@ -64,7 +63,6 @@ class App extends Component {
           }
         }.bind(this)
       );
-    console.log("I'm her and maybe happy");
   }
 
   compareBy = key => {
@@ -79,12 +77,6 @@ class App extends Component {
     let sortCar = [...this.state.cars];
     sortCar.sort(this.compareBy(key));
     this.setState({ cars: sortCar });
-  };
-
-  handleBrand = event => {
-    const { value } = event.target;
-    console.log("handleBrand called: " + value);
-    this.setState({ brand: value });
   };
 
   onSubmit = event => {
@@ -112,23 +104,41 @@ class App extends Component {
 
   onEditSubmit = car => {
     let oldCar = this.state.cars.find(c => c.id === car.id);
-
+    console.log(car);
     oldCar = {
       id: car.id,
       name: car.name,
       brand: car.brand,
       year: car.year
     };
-    const cars = this.state.cars.filter(c => c.id !== car.id);
-    //API??????????
-    console.log("Edited", cars);
-    axios.put(`https://localhost:44309//api/Car/`, oldCar).then(res => {
-      const newCar = res.data;
-      console.log(newCar);
-    });
 
-    cars.push(oldCar);
-    this.setState({ cars, editCar: false });
+    console.log("Edited", oldCar);
+    axios
+      .put(`https://localhost:44309//api/Car/`, oldCar)
+      .then(res => {
+        const newCar = res.data;
+
+        console.log("Axios: ", newCar);
+
+        const cars = this.state.cars.filter(c => c.id !== car.id);
+
+        cars.push(newCar);
+        this.setState({ cars, editCar: false });
+      })
+      .catch(
+        function(error) {
+          this.setState({ dataFail: true });
+          if (error.response) {
+            this.setState({
+              dataMsg: "Sever Access Denied: " + error.response.status
+            });
+          } else if (error.request) {
+            this.setState({ dataMsg: "Sever dident respond" });
+          } else {
+            this.setState({ dataMsg: "Failed to send request" });
+          }
+        }.bind(this)
+      );
   };
 
   handleCancel = () => {
@@ -157,6 +167,7 @@ class App extends Component {
           oneCar={this.state.oneCar}
           onSubmit={this.onEditSubmit}
           onCancelOut={this.handleCancel}
+          BrandOfCars={this.state.BrandOfCars}
         />
       );
     }
@@ -179,7 +190,7 @@ class App extends Component {
             onChange={this.handleBrand}
             BrandOfCars={this.state.BrandOfCars}
           />
-          <table>
+          <table className="table">
             <CarSort onSortBy={this.sortBy} />
             <CarList
               cars={this.state.cars}

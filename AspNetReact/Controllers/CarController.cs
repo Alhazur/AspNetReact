@@ -39,15 +39,17 @@ namespace AspNetReact.Controllers
             return Json("");
         }
 
-        [HttpPut("{id}")]
+        //[HttpPut("{id}")]
+        [HttpPut]
         public JsonResult Edit(Car car)
         {
             if (ModelState.IsValid)
             {
                 _car.UpdateCar(car);
-                return Json("Index");
+                return Json(car);
             }
-            return Json(car);
+
+            return Json("Invalid");
         }
 
         [HttpDelete("{id}")]

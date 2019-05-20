@@ -21,7 +21,7 @@ class CarDetails extends Component {
               name="name"
               value={name}
               className="form-control"
-              class="list-group-item disabled"
+              className="list-group-item disabled"
             />
           </div>
         </div>
@@ -33,7 +33,7 @@ class CarDetails extends Component {
               name="brand"
               value={brand}
               className="form-control"
-              class="list-group-item disabled"
+              className="list-group-item disabled"
             />
           </div>
         </div>
@@ -45,7 +45,7 @@ class CarDetails extends Component {
               name="year"
               value={year}
               className="form-control"
-              class="list-group-item disabled"
+              className="list-group-item disabled"
             />
           </div>
         </div>

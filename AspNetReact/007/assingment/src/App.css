@@ -31,29 +31,3 @@
     transform: rotate(360deg);
   }
 }
-
-.table {
-  margin: 1em;
-  display: flex;
-  flex-direction: column;
-}
-.header,
-.row {
-  padding-left: 10px;
-
-  display: flex;
-}
-.xxx {
-  flex: 1;
-  padding: 0.2rem 0.4em;
-  border: 1px solid rgb(238, 238, 238);
-}
-.header {
-  background-color: rgb(238, 238, 238);
-}
-
-.xxx {
-  max-width: 160px;
-  cursor: pointer;
-  padding-right: 50px;
-}

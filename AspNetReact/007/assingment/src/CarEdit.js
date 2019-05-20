@@ -23,6 +23,12 @@ class CarEdit extends Component {
     });
   };
 
+  handleBrand = event => {
+    const { value } = event.target;
+    console.log("handleBrand called: " + value);
+    this.setState({ brand: value });
+  };
+
   render() {
     const { id, name, brand, year } = this.state;
 
@@ -45,13 +51,13 @@ class CarEdit extends Component {
           <div className="form-group">
             <div className="col-4">
               <label>Brand: </label>
-              <input
-                type="text"
-                name="brand"
-                value={brand}
-                className="form-control"
-                onChange={this.handleChange}
-              />
+              <select onChange={this.handleBrand}>
+                {this.props.BrandOfCars.map((brand, index) => (
+                  <option name="brand" key={index}>
+                    {brand}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="form-group">

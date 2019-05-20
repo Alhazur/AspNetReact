@@ -4,18 +4,12 @@ class CarSort extends Component {
   render() {
     const { onSortBy } = this.props;
     return (
-      <thead>
+      <thead className="card-header">
         <tr>
-          <th className="xxx" onClick={() => onSortBy("name")}>
-            Name
-          </th>
-          <th className="xxx" onClick={() => onSortBy("brand")}>
-            Brand
-          </th>
-          <th className="xxx" onClick={() => onSortBy("year")}>
-            Year
-          </th>
-          <th className="xxx">Options</th>
+          <th onClick={() => onSortBy("name")}>Name</th>
+          <th onClick={() => onSortBy("brand")}>Brand</th>
+          <th onClick={() => onSortBy("year")}>Year</th>
+          <th>Options</th>
         </tr>
       </thead>
     );
